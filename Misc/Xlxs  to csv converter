@@ -1,0 +1,22 @@
+import pandas as pd
+import os
+#import libraries needed
+
+os.chdir(r'C:\Users\harry\Desktop\Excel test\not ready') #set up working directory
+cwd=os.getcwd() 
+filelist = os.listdir(cwd) #varible to iterate through folder 
+endpath=r'C:\Users\harry\Desktop\Excel test\ready' #variable to name output directory 
+
+
+
+for  file in filelist:  # iterate through every file in the folder 
+    #get the name of the current file to match CSV output
+    filename=os.path.splitext(file)[0]
+    newname=endpath+"\\" +filename + ".csv"
+    
+    #read xlxs and convert a single sheet CSV using old filename in a different folder. If multiple sheets were needed a for loop can be added
+    
+    df=pd.read_excel(file, sheet_name='Example_EXPORT')
+    df.to_csv(newname,index = False, header=True)
+    
+print('done')
